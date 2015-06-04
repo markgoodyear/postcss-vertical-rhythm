@@ -1,0 +1,34 @@
+{
+  "name": "postcss-vertical-rhythm",
+  "version": "1.0.0",
+  "description": "A PostCSS plugin to create a custom vertical rhythm unit from the base font-size and line-height.",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "spacing",
+    "unit",
+    "rhythm",
+    "vertical-rhythm",
+    "type",
+    "typography"
+  ],
+  "author": "Mark Goodyear <hello@markgoodyear.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markgoodyear/postcss-vertical-rhythm.git"
+  },
+  "dependencies": {
+    "postcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^0.13.0",
+    "gulp-mocha": "^2.1.0"
+  },
+  "scripts": {
+    "test": "gulp"
+  }
+}
