@@ -1,5 +1,4 @@
 var postcss = require('postcss');
-var spacingValue;
 
 /**
  * Convert unit to unitless px value.
@@ -34,37 +33,38 @@ var calcLineHeight = function (fontProps) {
 
 /**
  * Gets the font declaration properties.
- * @param  {String} declValue
+ * @param  {Object} decl
  * @return {Array}
  */
-var getProps = function (declValue) {
+var getProps = function (decl) {
 
   // Matches {$1:font-size}{$2:unit}/{$3:line-height}.
-  var fontProps = declValue.match(/(\d+|\d+?\.\d+)(r?em|px|%)(?:\s*\/\s*)(\d+|\d+?\.\d+)\s+/);
+  var fontProps = decl.value.match(/(\d+|\d+?\.\d+)(r?em|px|%)(?:\s*\/\s*)(\d+|\d+?\.\d+)\s+/);
 
   // Make sure the line-height value is declared.
   if (!fontProps) {
-    throw new Error('Font declaration is invalid. Make sure line-height is set.');
+    throw decl.error('Font declaration is invalid. Make sure line-height is set.');
   }
 
   return fontProps;
 };
 
 /**
- * Gets the spacing value.
- * @param  {String} declValue
+ * Gets the rhythm value.
+ * @param  {Object} decl
  * @return {Number}
  */
-var getSpacingValue = function (declValue) {
-  var val = parseFloat(declValue) || 1;
+var getRhythmValue = function (decl, rhythmValue) {
+  var val = parseFloat(decl.value) || 1;
 
-  return spacingValue * val;
+  return rhythmValue * val;
 };
 
 module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
   opts = opts || {};
   var rootSelector = opts.rootSelector || 'body';
   var rhythmUnit = 'vr';
+  var rhythmValue;
 
   return function (css) {
     css.eachDecl(function transformDecl (decl) {
@@ -72,17 +72,17 @@ module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
       // Check for root font-size.
       if (decl.parent.selector === rootSelector) {
         if (decl.prop === 'font') {
-          var props = getProps(decl.value);
+          var props = getProps(decl);
 
-          spacingValue = calcLineHeight(props);
+          rhythmValue = calcLineHeight(props);
         } else {
-          throw new Error('font declaration not found in ' + rootSelector);
+          throw decl.error('Font declaration not found in ' + rootSelector);
         }
       }
 
-      // Calculate spacing value.
+      // Calculate ryhthm value.
       if (decl.value.indexOf(rhythmUnit) !== -1) {
-        decl.value = getSpacingValue(decl.value) + 'px';
+        decl.value = getRhythmValue(decl, rhythmValue) + 'px';
       }
     });
   };

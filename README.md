@@ -1,4 +1,4 @@
-# postcss-vertical-ryhthm [![Build Status][ci-img]][ci]
+# postcss-vertical-rhythm [![Build Status][ci-img]][ci]
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.org/markgoodyear/postcss-vertical-rhythm.svg?branch=master
 [ci]:      https://travis-ci.org/markgoodyear/postcss-vertical-rhythm
@@ -46,16 +46,15 @@ Default:
 ## Usage
 Install:
 ```
-npm install postcss-vertical-ryhthm --save-dev
+npm install postcss-vertical-rhythm --save-dev
 ```
 
 Then include the plugin:
 ```js
-postcss([ require('vertical-ryhthm')({ options }) ])
+postcss([ require('postcss-vertical-rhythm')(options) ])
 ```
 
 See [PostCSS] docs for examples for your environment.
-
 
 ## Licence
 Released under the MIT license.
