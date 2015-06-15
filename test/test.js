@@ -56,8 +56,75 @@ describe('postcss-vertical-ryhthm', function () {
     });
   });
 
+  describe('multiple root selectors', function () {
+    it('one font declaration', function (done) {
+      test(
+        'body { color: #333; } body { font: 16px/2 serif } p { margin-botom: 1vr }',
+        'body { color: #333; } body { font: 16px/2 serif } p { margin-botom: 32px }',
+        { },
+        done
+      );
+    });
+
+    it('two font declarations, the latter takes precidence', function (done) {
+      test(
+        'body { color: #333; font: 16px/2 serif } body { font: 16px/1 serif } p { margin-botom: 1vr }',
+        'body { color: #333; font: 16px/2 serif } body { font: 16px/1 serif } p { margin-botom: 16px }',
+        { },
+        done
+      );
+    });
+  });
+
+  describe('shorthand declarations', function () {
+    it('one value', function (done) {
+      test(
+        'body { font: 16px/2 serif } p { margin: 1vr }',
+        'body { font: 16px/2 serif } p { margin: 32px }',
+        { },
+        done
+      );
+    });
+
+    it('two values', function (done) {
+      test(
+        'body { font: 16px/2 serif } p { margin: 1vr 2vr }',
+        'body { font: 16px/2 serif } p { margin: 32px 64px }',
+        { },
+        done
+      );
+    });
+
+    it('three values', function (done) {
+      test(
+        'body { font: 16px/2 serif } p { margin: 1vr 2vr 3vr }',
+        'body { font: 16px/2 serif } p { margin: 32px 64px 96px }',
+        { },
+        done
+      );
+    });
+
+    it('four values', function (done) {
+      test(
+        'body { font: 16px/2 serif } p { margin: 1vr 2vr 3vr 4vr }',
+        'body { font: 16px/2 serif } p { margin: 32px 64px 96px 128px }',
+        { },
+        done
+      );
+    });
+
+    it('mixed units', function (done) {
+      test(
+        'body { font: 16px/2 serif } p { margin: 1vr 10px .5vr 0 }',
+        'body { font: 16px/2 serif } p { margin: 32px 10px 16px 0 }',
+        { },
+        done
+      );
+    });
+  });
+
   describe('options', function () {
-    it('rootSelector', function (done) {
+    it('rootSelector change', function (done) {
       test(css('html', '16px/2', '1vr'), css('html', '16px/2', '32px'), { rootSelector: 'html' }, done);
     });
   });

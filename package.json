@@ -1,6 +1,6 @@
 {
   "name": "postcss-vertical-rhythm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A PostCSS plugin to create a custom vertical rhythm unit from the base font-size and line-height.",
   "keywords": [
     "postcss",
@@ -25,8 +25,8 @@
   "devDependencies": {
     "chai": "^3.0.0",
     "gulp": "^3.9.0",
-    "gulp-eslint": "^0.13.0",
-    "gulp-mocha": "^2.1.0"
+    "gulp-eslint": "^0.14.0",
+    "gulp-mocha": "^2.1.1"
   },
   "scripts": {
     "test": "gulp"

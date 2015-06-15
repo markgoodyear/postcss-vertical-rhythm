@@ -41,9 +41,9 @@ var getProps = function (decl) {
   // Matches {$1:font-size}{$2:unit}/{$3:line-height}.
   var fontProps = decl.value.match(/(\d+|\d+?\.\d+)(r?em|px|%)(?:\s*\/\s*)(\d+|\d+?\.\d+)\s+/);
 
-  // Make sure the line-height value is declared.
+  // Make sure font delcaration is valid.
   if (!fontProps) {
-    throw decl.error('Font declaration is invalid. Make sure line-height is set.');
+    throw decl.error('Font declaration is invalid.');
   }
 
   return fontProps;
@@ -51,11 +51,11 @@ var getProps = function (decl) {
 
 /**
  * Gets the rhythm value.
- * @param  {Object} decl
+ * @param  {Number} declValue
  * @return {Number}
  */
-var getRhythmValue = function (decl, rhythmValue) {
-  var val = parseFloat(decl.value) || 1;
+var getRhythmValue = function (declValue, rhythmValue) {
+  var val = parseFloat(declValue) || 1;
 
   return rhythmValue * val;
 };
@@ -75,14 +75,19 @@ module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
           var props = getProps(decl);
 
           rhythmValue = calcLineHeight(props);
-        } else {
-          throw decl.error('Font declaration not found in ' + rootSelector);
         }
       }
 
       // Calculate ryhthm value.
       if (decl.value.indexOf(rhythmUnit) !== -1) {
-        decl.value = getRhythmValue(decl, rhythmValue) + 'px';
+
+        // Use new RegExp to capture var
+        var regexp = new RegExp('(\\d*\\.?\\d+)' + rhythmUnit, 'gi');
+
+        // Replace each vr unit value in the decl.value, e.g. shorthand properties.
+        decl.value = decl.value.replace(regexp, function ($1) {
+          return getRhythmValue($1, rhythmValue) + 'px';
+        });
       }
     });
   };
