@@ -8,7 +8,7 @@ A [PostCSS] plugin to create a custom vertical rhythm unit from the base font-si
 Set the font on the body selector using the CSS shorthand method, you can use either `px`, `em`, `rem` or `%` unit for font-size:
 
 ```css
-.body {
+body {
   font: 16px/2 serif;
 }
 ```
