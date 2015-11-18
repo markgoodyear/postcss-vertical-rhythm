@@ -63,6 +63,7 @@ var getRhythmValue = function (declValue, rhythmValue) {
 module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
   opts = opts || {};
   var rootSelector = opts.rootSelector || 'body';
+  var outputUnit = opts.outputUnit || 'px';
   var rhythmUnit = 'vr';
   var rhythmValue;
 
@@ -81,7 +82,7 @@ module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
       // Calculate ryhthm value.
       if (decl.value.indexOf(rhythmUnit) !== -1) {
 
-        // Use new RegExp to capture var
+        // Use new RegExp to capture var.
         var regexp = new RegExp('(\\d*\\.?\\d+)' + rhythmUnit, 'gi');
 
         // Replace each vr unit value in the decl.value, e.g. shorthand properties.

@@ -1,3 +1,7 @@
+## v1.1.3
+- Update for PostCSS 5
+- Update dependencies
+
 ## v1.1.2
 - Fix selector in readme (issue #3)
 
