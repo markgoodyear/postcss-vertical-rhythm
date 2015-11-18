@@ -63,7 +63,6 @@ var getRhythmValue = function (declValue, rhythmValue) {
 module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
   opts = opts || {};
   var rootSelector = opts.rootSelector || 'body';
-  var outputUnit = opts.outputUnit || 'px';
   var rhythmUnit = 'vr';
   var rhythmValue;
 

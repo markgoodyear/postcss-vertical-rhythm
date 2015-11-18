@@ -1,3 +1,6 @@
+## v1.1.4
+- Remove var preventing tests from passing that was added for postponed feature
+
 ## v1.1.3
 - Update for PostCSS 5
 - Update dependencies
