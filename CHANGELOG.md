@@ -1,3 +1,6 @@
+## v1.1.5
+- Update travis for newer node versions
+
 ## v1.1.4
 - Remove var preventing tests from passing that was added for postponed feature
 
