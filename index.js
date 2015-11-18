@@ -67,7 +67,7 @@ module.exports = postcss.plugin('postcss-vertical-rhythm', function (opts) {
   var rhythmValue;
 
   return function (css) {
-    css.eachDecl(function transformDecl (decl) {
+    css.walkDecls(function transformDecl (decl) {
 
       // Check for root font-size.
       if (decl.parent.selector === rootSelector) {

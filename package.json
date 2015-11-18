@@ -20,13 +20,13 @@
     "url": "https://github.com/markgoodyear/postcss-vertical-rhythm.git"
   },
   "dependencies": {
-    "postcss": "^4.1.11"
+    "postcss": "^5.0.12"
   },
   "devDependencies": {
-    "chai": "^3.0.0",
+    "chai": "^3.4.1",
     "gulp": "^3.9.0",
-    "gulp-eslint": "^0.14.0",
-    "gulp-mocha": "^2.1.1"
+    "gulp-eslint": "^1.1.0",
+    "gulp-mocha": "^2.2.0"
   },
   "scripts": {
     "test": "gulp"
